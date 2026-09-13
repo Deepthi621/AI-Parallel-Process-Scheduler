@@ -9,7 +9,8 @@ Predict CPU burst time using Machine Learning.
 Combine AI predictions with OpenMP scheduling.
 Compare execution time, speedup, efficiency, and thread utilization.
 Provide an interactive web dashboard for visualization.
-2. Technologies Used
+
+3. Technologies Used
 C++ – Scheduling algorithms
 OpenMP – Parallel execution
 Python – AI model
@@ -19,7 +20,8 @@ HTML, CSS, JavaScript – Web dashboard
 Matplotlib – Performance graphs
 CSV – Dataset and results
 MSYS2 UCRT64 + GCC – C++ compilation
-3. Project Structure
+
+4. Project Structure
 AI-Parallel-Process-Scheduler/
 │
 ├── frontend/
@@ -44,7 +46,7 @@ AI-Parallel-Process-Scheduler/
 ├── dataset/
 ├── results/
 └── README.md
-4. Setup
+5. Setup
 Install GCC/OpenMP
 
 Install MSYS2 UCRT64 and GCC:
@@ -65,6 +67,7 @@ python -m virtualenv .venv
 Install required packages:
 
 python -m pip install pandas numpy scikit-learn joblib matplotlib flask flask-cors
+
 5. Train AI Model
 cd ai_model
 python train_model.py
@@ -76,6 +79,7 @@ model.pkl
 Generate predictions:
 
 python generate_predictions.py
+
 6. Compile OpenMP Programs
 
 From the backend folder:
@@ -103,6 +107,7 @@ python generate_graphs.py
 Graphs are saved in:
 
 results/
+
 8. Start Flask API
 
 From backend:
@@ -113,6 +118,7 @@ python app.py
 The API runs at:
 
 http://127.0.0.1:5000
+
 9. Run Dashboard
 
 Open:
