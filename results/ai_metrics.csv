@@ -1,0 +1,7 @@
+metric,value
+training_processes,1000
+validation_samples,200
+validation_mae,1.40
+validation_r2,0.71
+unseen_test_processes,100
+unseen_test_mean_error,1.1695

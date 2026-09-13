@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Parallel Process Scheduler</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================
+         Header
+    ====================================== -->
+
+    <header>
+
+        <div class="header-content">
+
+            <h1>
+                AI-Enhanced Parallel Process Scheduler
+            </h1>
+
+            <p>
+                OpenMP-based process scheduling with
+                AI burst-time prediction
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         Main Dashboard
+    ====================================== -->
+
+    <main>
+
+
+        <!-- ==================================
+             Summary Cards
+        =================================== -->
+
+        <section class="cards">
+
+
+            <!-- Best Execution Time -->
+
+            <div class="card">
+
+                <h3>
+                    Best Execution Time
+                </h3>
+
+                <p
+                    class="value"
+                    id="best-time">
+
+                    --
+
+                </p>
+
+                <span id="best-time-label">
+                    Calculating...
+                </span>
+
+            </div>
+
+
+            <!-- AI Prediction Error -->
+
+            <div class="card">
+
+                <h3>
+                    AI Prediction Error
+                </h3>
+
+                <p
+                    class="value"
+                    id="ai-error">
+
+                    --
+
+                </p>
+
+                <span>
+                    Mean absolute error
+                </span>
+
+            </div>
+
+
+            <!-- Best Speedup -->
+
+            <div class="card">
+
+                <h3>
+                    Best Speedup
+                </h3>
+
+                <p
+                    class="value"
+                    id="best-speedup">
+
+                    4.84×
+
+                </p>
+
+                <span>
+                    AI + OpenMP
+                </span>
+
+            </div>
+
+
+            <!-- Total Processes -->
+
+            <div class="card">
+
+                <h3>
+                    Total Processes
+                </h3>
+
+                <p class="value">
+
+                    100
+
+                </p>
+
+                <span>
+                    Test workload
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================
+             Scheduler Comparison
+        =================================== -->
+
+        <section class="panel">
+
+            <h2>
+                Scheduler Comparison
+            </h2>
+
+
+            <!-- Thread Selector -->
+
+            <div class="controls">
+
+                <label for="thread-select">
+                    Select Number of Threads:
+                </label>
+
+                <select id="thread-select">
+
+                    <option value="1">
+                        1 Thread
+                    </option>
+
+                    <option value="2">
+                        2 Threads
+                    </option>
+
+                    <option value="4" selected>
+                        4 Threads
+                    </option>
+
+                    <option value="8">
+                        8 Threads
+                    </option>
+
+                    <option value="12">
+                        12 Threads
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Comparison Table -->
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Scheduler
+                        </th>
+
+                        <th>
+                            Threads
+                        </th>
+
+                        <th>
+                            Execution Time
+                        </th>
+
+                        <th>
+                            Speedup
+                        </th>
+
+                        <th>
+                            Efficiency
+                        </th>
+
+                        <th>
+                            Utilization
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="comparison-body">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- ==================================
+             Performance Graphs
+        =================================== -->
+
+        <section class="graphs">
+
+
+            <!-- Execution Time Graph -->
+
+            <div class="graph-card">
+
+                <h2>
+                    Execution Time vs Threads
+                </h2>
+
+                <img
+                    src="../results/execution_time_vs_threads.png"
+                    alt="Execution Time vs Threads"
+                >
+
+            </div>
+
+
+            <!-- Speedup Graph -->
+
+            <div class="graph-card">
+
+                <h2>
+                    Speedup vs Threads
+                </h2>
+
+                <img
+                    src="../results/speedup_vs_threads.png"
+                    alt="Speedup vs Threads"
+                >
+
+            </div>
+
+
+            <!-- Utilization Graph -->
+
+            <div class="graph-card">
+
+                <h2>
+                    Thread Utilization
+                </h2>
+
+                <img
+                    src="../results/thread_utilization.png"
+                    alt="Thread Utilization"
+                >
+
+            </div>
+
+
+            <!-- AI Prediction Graph -->
+
+            <div class="graph-card">
+
+                <h2>
+                    Actual vs Predicted Burst Time
+                </h2>
+
+                <img
+                    src="../results/actual_vs_predicted.png"
+                    alt="Actual vs Predicted Burst Time"
+                >
+
+            </div>
+
+        </section>
+
+        <!-- ==================================
+     Process Scheduling Simulator
+=================================== -->
+
+<section class="panel">
+
+    <h2>
+        Process Scheduling Simulator
+    </h2>
+
+    <p class="section-description">
+
+        Add processes and use AI-predicted burst
+        times to determine their scheduling order.
+
+    </p>
+
+
+    <!-- Process Input Form -->
+
+    <div class="prediction-form">
+
+
+        <!-- Process ID -->
+
+        <div class="input-group">
+
+            <label for="process-id-input">
+                Process ID
+            </label>
+
+            <input
+                type="text"
+                id="process-id-input"
+                value="P101"
+            >
+
+        </div>
+
+
+        <!-- CPU Usage -->
+
+        <div class="input-group">
+
+            <label for="sim-cpu-input">
+                CPU Usage (%)
+            </label>
+
+            <input
+                type="number"
+                id="sim-cpu-input"
+                min="0"
+                max="100"
+                value="65"
+            >
+
+        </div>
+
+
+        <!-- Memory -->
+
+        <div class="input-group">
+
+            <label for="sim-memory-input">
+                Memory Usage (MB)
+            </label>
+
+            <input
+                type="number"
+                id="sim-memory-input"
+                min="100"
+                max="1000"
+                value="450"
+            >
+
+        </div>
+
+
+        <!-- I/O -->
+
+        <div class="input-group">
+
+            <label for="sim-io-input">
+                I/O Operations
+            </label>
+
+            <input
+                type="number"
+                id="sim-io-input"
+                min="1"
+                max="15"
+                value="3"
+            >
+
+        </div>
+
+
+        <!-- Process Type -->
+
+        <div class="input-group">
+
+            <label for="sim-type-input">
+                Process Type
+            </label>
+
+            <select id="sim-type-input">
+
+                <option value="1">
+                    Type 1
+                </option>
+
+                <option value="2" selected>
+                    Type 2
+                </option>
+
+                <option value="3">
+                    Type 3
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Priority -->
+
+        <div class="input-group">
+
+            <label for="sim-priority-input">
+                Priority
+            </label>
+
+            <select id="sim-priority-input">
+
+                <option value="1">
+                    High
+                </option>
+
+                <option value="2" selected>
+                    Medium
+                </option>
+
+                <option value="3">
+                    Low
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- Add Process Button -->
+
+    <button
+        id="add-process-button"
+        class="predict-button">
+
+        Add Process
+
+    </button>
+
+
+    <!-- Process Table -->
+
+    <div class="process-table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Process
+                    </th>
+
+                    <th>
+                        CPU %
+                    </th>
+
+                    <th>
+                        Memory
+                    </th>
+
+                    <th>
+                        I/O
+                    </th>
+
+                    <th>
+                        Type
+                    </th>
+
+                    <th>
+                        Priority
+                    </th>
+
+                    <th>
+                        Predicted Burst
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="process-table-body">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- Scheduling Order -->
+
+    <div
+        id="scheduling-order"
+        class="prediction-result">
+
+        Add processes to generate
+        an AI-based scheduling order.
+
+    </div>
+    <!-- ==================================
+     Scheduling Strategy Comparison
+=================================== -->
+
+<div class="strategy-comparison">
+
+    <h3>
+        Scheduling Strategy Comparison
+    </h3>
+
+    <div class="strategy-grid">
+
+
+        <!-- FCFS -->
+
+        <div class="strategy-card">
+
+            <h4>
+                FCFS
+            </h4>
+
+            <p>
+                First Come First Serve
+            </p>
+
+            <div
+                id="fcfs-order"
+                class="strategy-order">
+
+                Add processes to view order.
+
+            </div>
+
+        </div>
+
+
+        <!-- SJF -->
+
+        <div class="strategy-card">
+
+            <h4>
+                SJF
+            </h4>
+
+            <p>
+                Shortest Job First
+            </p>
+
+            <div
+                id="sjf-order"
+                class="strategy-order">
+
+                Add processes to view order.
+
+            </div>
+
+        </div>
+
+
+        <!-- AI + OpenMP -->
+
+        <div class="strategy-card">
+
+            <h4>
+                AI + OpenMP
+            </h4>
+
+            <p>
+                AI burst prediction with
+                parallel execution
+            </p>
+
+            <div
+                id="ai-openmp-order"
+                class="strategy-order">
+
+                Add processes to view order.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+<!-- ==================================
+     Parallel Execution Timeline
+=================================== -->
+
+<section class="panel">
+
+    <h2>
+        Parallel Execution Timeline
+    </h2>
+
+    <p class="section-description">
+
+        Simulated allocation of scheduled processes
+        across OpenMP worker threads.
+
+    </p>
+
+
+    <div
+        id="execution-timeline"
+        class="execution-timeline">
+
+        Add processes to display
+        the parallel execution timeline.
+
+    </div>
+
+</section>
+
+        <!-- ==================================
+             AI Burst-Time Predictor
+        =================================== -->
+
+        <section class="panel">
+
+            <h2>
+                AI Burst-Time Predictor
+            </h2>
+
+
+            <p class="section-description">
+
+                Enter process characteristics to predict
+                the required CPU burst time using the
+                trained Random Forest model.
+
+            </p>
+
+
+            <!-- Prediction Input Form -->
+
+            <div class="prediction-form">
+
+
+                <!-- CPU Usage -->
+
+                <div class="input-group">
+
+                    <label for="cpu-input">
+                        CPU Usage (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cpu-input"
+                        min="0"
+                        max="100"
+                        value="65"
+                    >
+
+                </div>
+
+
+                <!-- Memory Usage -->
+
+                <div class="input-group">
+
+                    <label for="memory-input">
+                        Memory Usage (MB)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="memory-input"
+                        min="100"
+                        max="1000"
+                        value="450"
+                    >
+
+                </div>
+
+
+                <!-- I/O Operations -->
+
+                <div class="input-group">
+
+                    <label for="io-input">
+                        I/O Operations
+                    </label>
+
+                    <input
+                        type="number"
+                        id="io-input"
+                        min="1"
+                        max="15"
+                        value="3"
+                    >
+
+                </div>
+
+
+                <!-- Process Type -->
+
+                <div class="input-group">
+
+                    <label for="type-input">
+                        Process Type
+                    </label>
+
+                    <select id="type-input">
+
+                        <option value="1">
+                            Type 1
+                        </option>
+
+                        <option value="2" selected>
+                            Type 2
+                        </option>
+
+                        <option value="3">
+                            Type 3
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Prediction Button -->
+
+            <button
+                id="predict-button"
+                class="predict-button">
+
+                Predict Burst Time
+
+            </button>
+
+
+            <!-- Prediction Result -->
+
+            <div
+                id="prediction-result"
+                class="prediction-result">
+
+                Enter process details and click
+                <strong>
+                    Predict Burst Time
+                </strong>.
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================
+             AI Model Information
+        =================================== -->
+
+        <section class="panel">
+
+            <h2>
+                AI Model
+            </h2>
+
+
+            <div class="ai-info">
+
+
+                <!-- Model -->
+
+                <div>
+
+                    <strong>
+                        Model
+                    </strong>
+
+                    <span>
+                        Random Forest Regressor
+                    </span>
+
+                </div>
+
+
+                <!-- Training Processes -->
+
+                <div>
+
+                    <strong>
+                        Training Processes
+                    </strong>
+
+                    <span id="training-processes">
+                        1000
+                    </span>
+
+                </div>
+
+
+                <!-- Validation R² -->
+
+                <div>
+
+                    <strong>
+                        Validation R²
+                    </strong>
+
+                    <span id="validation-r2">
+                        0.71
+                    </span>
+
+                </div>
+
+
+                <!-- Validation MAE -->
+
+                <div>
+
+                    <strong>
+                        Validation MAE
+                    </strong>
+
+                    <span id="validation-mae">
+                        1.40
+                    </span>
+
+                </div>
+
+
+                <!-- Test Processes -->
+
+                <div>
+
+                    <strong>
+                        Unseen Test Processes
+                    </strong>
+
+                    <span id="test-processes">
+                        100
+                    </span>
+
+                </div>
+
+
+                <!-- Test Error -->
+
+                <div>
+
+                    <strong>
+                        Test Mean Error
+                    </strong>
+
+                    <span id="test-error">
+                        1.1695
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================
+         Footer
+    ====================================== -->
+
+    <footer>
+
+        <p>
+
+            AI-Enhanced Parallel Process Scheduling
+            using OpenMP
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================
+         JavaScript
+    ====================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
