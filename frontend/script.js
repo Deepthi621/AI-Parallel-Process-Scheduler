@@ -372,132 +372,6 @@ initializeDashboard();
 
 
 
-// ==========================================
-// AI Burst-Time Prediction
-// ==========================================
-
-const predictButton =
-    document.getElementById(
-        "predict-button"
-    );
-
-
-predictButton.addEventListener(
-    "click",
-    async function () {
-
-        const cpu =
-            document.getElementById(
-                "cpu-input"
-            ).value;
-
-
-        const memory =
-            document.getElementById(
-                "memory-input"
-            ).value;
-
-
-        const io =
-            document.getElementById(
-                "io-input"
-            ).value;
-
-
-        const processType =
-            document.getElementById(
-                "type-input"
-            ).value;
-
-
-        const result =
-            document.getElementById(
-                "prediction-result"
-            );
-
-
-        result.textContent =
-            "Predicting burst time...";
-
-
-        try {
-
-            const response =
-                await fetch(
-                    "http://127.0.0.1:5000/predict",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body: JSON.stringify({
-
-                            cpu_usage:
-                                cpu,
-
-                            memory_usage:
-                                memory,
-
-                            io_operations:
-                                io,
-
-                            process_type:
-                                processType
-
-                        })
-
-                    }
-                );
-
-
-            const data =
-                await response.json();
-
-
-            if (data.error) {
-
-                result.textContent =
-                    "Error: " +
-                    data.error;
-
-                return;
-
-            }
-
-
-            result.innerHTML = `
-
-                Predicted Burst Time:
-
-                <strong>
-
-                    ${data.predicted_burst_time}
-                    time units
-
-                </strong>
-
-            `;
-
-
-        }
-
-        catch (error) {
-
-            result.textContent =
-                "Unable to connect to AI API. " +
-                "Make sure Flask is running.";
-
-
-            console.error(error);
-
-        }
-
-    }
-);
-
 
 
 // ==========================================
@@ -665,37 +539,37 @@ function generateExecutionTimeline(
 
 
                     // ==================================
-// Set Block Width Based on Burst Time
-// ==================================
+                    // Set Block Width Based on Burst Time
+                    // ==================================
 
-const burst =
-    parseFloat(
-        process.predictedBurst
-    );
-
-
-const blockWidth =
-    Math.max(
-        90,
-        burst * 12
-    );
+                    const burst =
+                        parseFloat(
+                            process.predictedBurst
+                        );
 
 
-processBlock.style.width =
-    blockWidth + "px";
+                    const blockWidth =
+                        Math.max(
+                            90,
+                            burst * 12
+                        );
 
 
-processBlock.title =
-    "Process: " +
-    process.processId +
-    "\nPredicted Burst: " +
-    burst +
-    " time units";
+                    processBlock.style.width =
+                        blockWidth + "px";
 
 
-track.appendChild(
-    processBlock
-);
+                    processBlock.title =
+                        "Process: " +
+                        process.processId +
+                        "\nPredicted Burst: " +
+                        burst +
+                        " time units";
+
+
+                    track.appendChild(
+                        processBlock
+                    );
 
                 }
 
